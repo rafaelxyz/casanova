@@ -6,5 +6,5 @@ red() {
 green() {
   printf %b '\e[42m' '\e[8]' '\e[H\e[J'
 }
-
+clear
 "$@"

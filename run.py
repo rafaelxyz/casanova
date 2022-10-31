@@ -12,20 +12,20 @@ GPIO.setwarnings(False)
 
 
 def input_password():
-    os.system("clear")
     try:
         while True:
+            os.system("clear")
             x = input("")
             if x == "casanova!" or x == "c":
-                os.system("clear")
                 os.system("./colors.sh green")
                 print("correct password")
                 trigger_relay()
             if x == "exit123" or x == "e":
+                os.system("clear")
+                print("exiting!")
                 GPIO.cleanup()
                 exit(0)
             else:
-                os.system("clear")
                 os.system("./colors.sh red")
                 print("wrong password")
                 time.sleep(3)
