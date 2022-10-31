@@ -10,27 +10,31 @@ PIN = 21
 GPIO.setup(PIN, GPIO.OUT) # GPIO Assign mode
 GPIO.setwarnings(False)
 
+dir = os.environ['HOME'] + "/casanova/"
+
+def set_color(color):
+    os.system(dir + "colors.sh " + color)
 
 def input_password():
     try:
         while True:
-            os.system("./colors.sh black")
+            set_color("black")
             x = input("")
             if x == "casanova!" or x == "c":
-                os.system("./colors.sh green")
+                set_color("green")
                 print("correct password")
                 trigger_relay()
             if x == "exit123" or x == "e":
-                os.system("./colors.sh black")
+                set_color("black")
                 print("exiting!")
                 GPIO.cleanup()
                 exit(0)
             else:
-                os.system("./colors.sh red")
+                set_color("red")
                 print("wrong password, try again")
                 time.sleep(3)
     except KeyboardInterrupt:
-        os.system("./colors.sh black")
+        set_color("black")
         print("wrong password, try again")
         input_password()
 
