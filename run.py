@@ -24,7 +24,7 @@ def input_password():
             if x == "exit123" or x == "e":
                 GPIO.cleanup()
                 exit(0)
-            else
+            else:
                 os.system("clear")
                 os.system("./colors.sh red")
                 print("wrong password")
