@@ -26,7 +26,7 @@ def input_password():
     try:
         while True:
             bgcolor("black")
-            x = input(newlines.center(columns - 9))
+            x = input(newlines.center(columns - 5))
             if x == "casanova" or x == "c":
                 bgcolor("green")
                 txt("correct password")
