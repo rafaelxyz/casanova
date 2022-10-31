@@ -12,12 +12,13 @@ GPIO.setup(PIN, GPIO.OUT) # GPIO Assign mode
 GPIO.setwarnings(False)
 
 os.environ["PS1"] = "\e[?1;2;32;c"
-columns = shutil.get_terminal_size().columns
+columns = shutil.get_terminal_size().columns - 9
 
 def bgcolor(color):
     os.system("/home/casanova/casanova/colors.sh " + color)
 
 def txt(text):
+    "".center
     print("\n\n\n" + text.center(columns))
 
 def input_password():
@@ -25,11 +26,11 @@ def input_password():
         while True:
             bgcolor("black")
             x = input("\n\n\n".center(columns))
-            if x == "casanova!" or x == "c":
+            if x == "casanova" or x == "c":
                 bgcolor("green")
                 txt("correct password")
                 trigger_relay()
-            if x == "exit123" or x == "e":
+            if x == "exit" or x == "e":
                 bgcolor("black")
                 txt("exiting!")
                 GPIO.cleanup()
@@ -48,12 +49,8 @@ def trigger_relay():
     try:
         while True:
             GPIO.output(PIN, GPIO.HIGH)
-            #txt('pin21 on')
-            time.sleep(1)
-            GPIO.output(PIN, GPIO.LOW)
-            #txt('pin21 off')
-            time.sleep(1)
     except KeyboardInterrupt:
+        GPIO.output(PIN, GPIO.LOW)
         input_password()
     finally:
         GPIO.cleanup()
