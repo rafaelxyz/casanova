@@ -10,10 +10,9 @@ PIN = 21
 GPIO.setup(PIN, GPIO.OUT) # GPIO Assign mode
 GPIO.setwarnings(False)
 
-dir = os.environ['HOME'] + "/casanova/"
 
 def set_color(color):
-    os.system(dir + "colors.sh " + color)
+    os.system("/home/casanova/casanova/colors.sh " + color)
 
 def input_password():
     try:
