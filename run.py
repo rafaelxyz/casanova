@@ -12,7 +12,7 @@ GPIO.setup(PIN, GPIO.OUT) # GPIO Assign mode
 GPIO.setwarnings(False)
 
 os.environ["PS1"] = "\e[?1;2;32;c"
-columns = shutil.get_terminal_size().columns - 9
+columns = shutil.get_terminal_size().columns
 
 def bgcolor(color):
     os.system("/home/casanova/casanova/colors.sh " + color)
@@ -25,7 +25,7 @@ def input_password():
     try:
         while True:
             bgcolor("black")
-            x = input("\n\n\n".center(columns))
+            x = input("\n\n\n\n".center(columns - 9))
             if x == "casanova" or x == "c":
                 bgcolor("green")
                 txt("correct password")
