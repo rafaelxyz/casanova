@@ -62,12 +62,12 @@ font = ImageFont.truetype('04B_08__.TTF',16)
 
 chars = set('qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM')
 
-def check_input(x, text):
-    if x == "\n":
-        x = ""
-    if any((c in chars) for c in x):
-        text += x
-    if x.capitalize() == "CASANOVA":
+def check_input(char, text):
+    if char == "\n":
+        text = ""
+    if any((c in chars) for c in char):
+        text += char
+    if text.capitalize() == "CASANOVA":
         GPIO.output(PIN, GPIO.HIGH)
 
 import tty, sys, termios
