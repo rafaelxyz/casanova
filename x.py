@@ -94,6 +94,7 @@ while True:
         if txt == "correct":
             while True:
                 GPIO.output(PIN, GPIO.HIGH)
+                time.sleep(1)
     except(KeyboardInterrupt):
         GPIO.output(PIN, GPIO.LOW)
         print("\n")
