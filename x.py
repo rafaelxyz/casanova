@@ -83,11 +83,11 @@ font = ImageFont.truetype('04B_08__.TTF',8)
 intxt = "incorrect"
 
 def get_intxt():
-    try:
-        while True:
+    while True:
+        try:
             intxt = input()
-    except KeyboardInterrupt:
-        break
+        except KeyboardInterrupt:
+            break
 
 t = Thread(target=get_intxt)
 t.run()
