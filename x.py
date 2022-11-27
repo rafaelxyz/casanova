@@ -30,6 +30,9 @@ DC = 24
 SPI_PORT = 0
 SPI_DEVICE = 0
 
+# 128x32 display with hardware SPI:
+disp = SSD1305.SSD1305_128_32(rst=RST, dc=DC, spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE, max_speed_hz=8000000))
+
 # Initialize library.
 disp.begin()
 
