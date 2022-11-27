@@ -66,12 +66,17 @@ import tty, sys, termios
 filedescriptors = termios.tcgetattr(sys.stdin)
 tty.setcbreak(sys.stdin)
 
+def trigger_relay():
+    try:
+        while True:
+            GPIO.output(PIN, GPIO.HIGH)
+    except KeyboardInterrupt:
+        GPIO.output(PIN, GPIO.LOW)
 
 def check_input(char, text):
     if re.match('[a-zA-Z]', char):
         text += char
-    if text.capitalize() == "CASANOVA":
-        GPIO.output(PIN, GPIO.HIGH)
+    if text.lower() == "casanova":
         text = "correct"
     elif char == "\n":
         text = ""
@@ -86,7 +91,11 @@ while True:
         disp.image(image)
         disp.display()
         time.sleep(.1)
+        if txt == "correct":
+            while True:
+                GPIO.output(PIN, GPIO.HIGH)
     except(KeyboardInterrupt):
+        GPIO.output(PIN, GPIO.LOW)
         print("\n")
         break
 
