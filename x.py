@@ -88,6 +88,7 @@ while True:
         time.sleep(.1)
         if txt == "incorrect":
             time.sleep(3)
+            txt = ""
     except(KeyboardInterrupt):
         print("\n")
         break
