@@ -58,41 +58,30 @@ x = 0
 
 # Alternatively load a TTF font.  Make sure the .ttf font file is in the same directory as the python script!
 # Some other nice fonts to try: http://www.dafont.com/bitmap.php
-font = ImageFont.truetype('04B_08__.TTF',8)
+font = ImageFont.truetype('04B_08__.TTF',16)
 
-# def trigger_relay():
-#     try:
-#         while True:
-#             GPIO.output(PIN, GPIO.HIGH)
-#     except KeyboardInterrupt:
-#         GPIO.output(PIN, GPIO.LOW)
-#     finally:
-#         GPIO.cleanup()
+chars = set('qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM')
 
-#         intxt = input()
-#         if intxt == "c":
-#             trigger_relay()
-#         if intxt == "e":
-#         else:
-#             intxt = "incorrect"
-#             time.sleep(3)
+def check_input(x, text):
+    if x == "\n":
+        x = ""
+    if any((c in chars) for c in x):
+        text += x
+    if x.capitalize() == "CASANOVA":
+        GPIO.output(PIN, GPIO.HIGH)
 
 import tty, sys, termios
 
 filedescriptors = termios.tcgetattr(sys.stdin)
 tty.setcbreak(sys.stdin)
 
-intxt = ""
-
+txt = ""
 while True:
     try:
-        # Draw a black filled box to clear the image.
         draw.rectangle((0,0,width,height), outline=0, fill=0)
-        txt = sys.stdin.read(1)[0]
-        if txt:
-            intxt += txt
-        draw.text((x, top+8), intxt, font=font, fill=255)
-        # Display image.
+
+        txt = check_input(sys.stdin.read(1)[0], txt)
+        draw.text((x, top+8), str(txt), font=font, fill=255)
         disp.image(image)
         disp.display()
         time.sleep(.1)
@@ -100,4 +89,5 @@ while True:
         print("\n")
         break
 
+GPIO.cleanup()
 termios.tcsetattr(sys.stdin, termios.TCSADRAIN, filedescriptors)
