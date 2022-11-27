@@ -60,32 +60,34 @@ x = 0
 # Some other nice fonts to try: http://www.dafont.com/bitmap.php
 font = ImageFont.truetype('04B_08__.TTF',16)
 
-chars = set('qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM')
 import re
-
-def check_input(char, text):
-    if char == "\n":
-        text = ""
-    if re.match('[a-zA-Z]'), char)
-        text += char
-    if text.capitalize() == "CASANOVA":
-        GPIO.output(PIN, GPIO.HIGH)
-
 import tty, sys, termios
 
 filedescriptors = termios.tcgetattr(sys.stdin)
 tty.setcbreak(sys.stdin)
 
+
+def check_input(char, text):
+    if re.match('[a-zA-Z]', char):
+        text += char
+    if text.capitalize() == "CASANOVA":
+        GPIO.output(PIN, GPIO.HIGH)
+        text = "correct"
+    elif char == "\n":
+        text = "incorrect"
+    return text
+
 txt = ""
 while True:
     try:
         draw.rectangle((0,0,width,height), outline=0, fill=0)
-
         txt = check_input(sys.stdin.read(1)[0], txt)
         draw.text((x, top+8), str(txt), font=font, fill=255)
         disp.image(image)
         disp.display()
         time.sleep(.1)
+        if txt == "incorrect":
+            time.sleep(3)
     except(KeyboardInterrupt):
         print("\n")
         break
