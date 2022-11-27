@@ -61,11 +61,12 @@ x = 0
 font = ImageFont.truetype('04B_08__.TTF',16)
 
 chars = set('qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM')
+import re
 
 def check_input(char, text):
     if char == "\n":
         text = ""
-    if any((c in chars) for c in char):
+    if re.match('[a-zA-Z]', char)
         text += char
     if text.capitalize() == "CASANOVA":
         GPIO.output(PIN, GPIO.HIGH)
