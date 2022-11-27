@@ -95,6 +95,11 @@ while True:
             while True:
                 GPIO.output(PIN, GPIO.HIGH)
                 time.sleep(1)
+                if sys.stdin.read(1)[0] == "\n":
+                    GPIO.output(PIN, GPIO.LOW)
+                    txt = ""
+                    break
+
     except(KeyboardInterrupt):
         GPIO.output(PIN, GPIO.LOW)
         print("\n")
