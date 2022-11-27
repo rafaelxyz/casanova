@@ -66,7 +66,7 @@ import re
 def check_input(char, text):
     if char == "\n":
         text = ""
-    if re.match('[a-zA-Z]', char)
+    if re.match('[a-zA-Z]'), char)
         text += char
     if text.capitalize() == "CASANOVA":
         GPIO.output(PIN, GPIO.HIGH)
