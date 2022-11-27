@@ -74,7 +74,7 @@ def check_input(char, text):
         GPIO.output(PIN, GPIO.HIGH)
         text = "correct"
     elif char == "\n":
-        text = "incorrect"
+        text = ""
     return text
 
 txt = ""
@@ -86,9 +86,6 @@ while True:
         disp.image(image)
         disp.display()
         time.sleep(.1)
-        if txt == "incorrect":
-            time.sleep(3)
-            txt = ""
     except(KeyboardInterrupt):
         print("\n")
         break
