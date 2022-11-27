@@ -10,13 +10,10 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 
-import subprocess
-
 ##
 import RPi.GPIO as GPIO
 import os
 import shutil
-from threading import Thread
 GPIO.setmode(GPIO.BCM) # GPIO Numbers instead of board numbers
 PIN = 21
 GPIO.setup(PIN, GPIO.OUT) # GPIO Assign mode
@@ -59,9 +56,6 @@ bottom = height-padding
 # Move left to right keeping track of the current x position for drawing shapes.
 x = 0
 
-# Load default font.
-#font = ImageFont.load_default()
-
 # Alternatively load a TTF font.  Make sure the .ttf font file is in the same directory as the python script!
 # Some other nice fonts to try: http://www.dafont.com/bitmap.php
 font = ImageFont.truetype('04B_08__.TTF',8)
@@ -83,22 +77,20 @@ font = ImageFont.truetype('04B_08__.TTF',8)
 #             intxt = "incorrect"
 #             time.sleep(3)
 
-intxt = "incorrect"
+import tty, sys, termios
 
-def get_intxt():
-    while True:
-        try:
-            intxt = input()
-        except KeyboardInterrupt:
-            break
+filedescriptors = termios.tcgetattr(sys.stdin)
+tty.setcbreak(sys.stdin)
 
-t = Thread(target=get_intxt)
-t.run()
+intxt = ""
 
 while True:
     try:
         # Draw a black filled box to clear the image.
         draw.rectangle((0,0,width,height), outline=0, fill=0)
+        txt = sys.stdin.read(1)[0]
+        if txt:
+            intxt += txt
         draw.text((x, top+8), intxt, font=font, fill=255)
         # Display image.
         disp.image(image)
@@ -107,3 +99,5 @@ while True:
     except(KeyboardInterrupt):
         print("\n")
         break
+
+termios.tcsetattr(sys.stdin, termios.TCSADRAIN, filedescriptors)
