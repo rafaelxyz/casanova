@@ -77,7 +77,7 @@ def check_input(char, text):
     if re.match('[a-zA-Z]', char):
         text += char
     if text.lower() == "casanova":
-        text = "correct"
+        text = "* correct *"
     elif char == "\n":
         text = ""
     return text
@@ -91,10 +91,9 @@ while True:
         disp.image(image)
         disp.display()
         time.sleep(.1)
-        if txt == "correct":
+        if txt == "* correct *":
             while True:
                 GPIO.output(PIN, GPIO.HIGH)
-                time.sleep(1)
                 if sys.stdin.read(1)[0] == "\n":
                     GPIO.output(PIN, GPIO.LOW)
                     txt = ""
