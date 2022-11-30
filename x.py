@@ -80,6 +80,8 @@ def check_input(char, text):
         text = "* correct *"
     elif char == "\n":
         text = ""
+    elif char == "\x7f":
+        text = text.rstrip(text[-1])
     return text
 
 txt = ""
