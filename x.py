@@ -105,6 +105,8 @@ while True:
         GPIO.output(PIN, GPIO.LOW)
         print("\n")
         break
+    finally:
+        draw.rectangle((0,0,width,height), outline=0, fill=0)
 
 GPIO.cleanup()
 termios.tcsetattr(sys.stdin, termios.TCSADRAIN, filedescriptors)
