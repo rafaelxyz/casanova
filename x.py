@@ -80,7 +80,7 @@ def check_input(char, text):
         text = "* correct *"
     elif char == "\n":
         text = ""
-    elif char == "\x7f":
+    elif char == "\x7f" or char == "\x1b":
         text = text[:-1]
     return text
 

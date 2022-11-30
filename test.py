@@ -18,6 +18,7 @@ txt = ""
 while True:
     #txt = check_input(sys.stdin.read(1)[0], txt)
     #print(txt)
-    print(repr(sys.stdin.read(1)[0]))
+    x = sys.stdin.read(1)[0]
+    print(repr(x))
 
 termios.tcsetattr(sys.stdin, termios.TCSADRAIN, filedescriptors)
