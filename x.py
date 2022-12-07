@@ -75,15 +75,15 @@ def trigger_relay():
 
 def check_input(char, text):
     global incorrect_state
-    if re.match('[a-zA-Z]', char):
+    if text.lower() == "casanova":
+        text = "* correct *"
+    elif len(text) >= 12:
+        text = ""
+    elif re.match('[a-zA-Z]', char):
         if incorrect_state is True:
             text = ""
             incorrect_state = False
         text += char
-    elif text.lower() == "casanova":
-        text = "* correct *"
-    elif len(text) >= 12:
-        text = ""
     elif char == "\n":
         if len(text) > 1 and incorrect_state is False:
             text = " incorrect!"
