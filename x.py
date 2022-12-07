@@ -74,6 +74,7 @@ def trigger_relay():
         GPIO.output(PIN, GPIO.LOW)
 
 def check_input(char, text):
+    global incorrect_state
     if re.match('[a-zA-Z]', char):
         text += char
     if text.lower() == "casanova":
