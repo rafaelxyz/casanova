@@ -77,37 +77,37 @@ def check_input(char, text):
     if text.lower() == "casanova":
         text = "* correct *"
     elif char == "\n":
-        text = ""
+        if len(text) > 0:
+            text = "* incorrect *"
+        else:
+            text = ""
     elif char == "\x7f" or char == "\x1b":
         text = text[:-1]
     return text
 
-txt = ""
-def display_txt(txt):
-    draw.text((x, top+8), str(txt), font=font, fill=255)
+def display_txt(text):
+    draw.text((x, top+8), str(text), font=font, fill=255)
     disp.image(image)
     disp.display()
 
+def clear_screen():
+    draw.rectangle((0,0,width,height), outline=0, fill=0)
+
+txt = ""
 while True:
     try:
-        draw.rectangle((0,0,width,height), outline=0, fill=0)
+        clear_screen()
         txt = check_input(sys.stdin.read(1)[0], txt)
         display_txt(txt)
         time.sleep(.1)
         if txt == "* correct *":
             GPIO.output(PIN, GPIO.HIGH)
             counter = 0
-            while True:
+            while True:  # try removing while
                 if sys.stdin.read(1)[0] == "\n":
                     GPIO.output(PIN, GPIO.LOW)
-                    txt = ""
+                    clear_screen()
                     break
-                else:
-                    counter = counter + 1
-                    display_txt("* correct ")
-                    if counter % 10:
-                        display_txt("")
-
 
     except(KeyboardInterrupt):
         GPIO.output(PIN, GPIO.LOW)
