@@ -76,11 +76,10 @@ def check_input(char, text):
         text += char
     if text.lower() == "casanova":
         text = "* correct *"
+    if len(text) >= 12:
+        text = "*incorrect*"
     elif char == "\n":
-        if len(text) > 0:
-            text = "* incorrect *"
-        else:
-            text = ""
+        text = ""
     elif char == "\x7f" or char == "\x1b":
         text = text[:-1]
     return text
