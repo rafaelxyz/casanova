@@ -85,7 +85,7 @@ def check_input(char, text):
     elif len(text) >= 12:
         text = ""
     elif char == "\n":
-        if len(text) > 0 and incorrect_state is False:
+        if len(text) > 1 and incorrect_state is False:
             text = " incorrect!"
             incorrect_state = True
         else:
