@@ -64,6 +64,8 @@ import tty, sys, termios
 filedescriptors = termios.tcgetattr(sys.stdin)
 tty.setcbreak(sys.stdin)
 
+incorrect_state = False
+
 def trigger_relay():
     try:
         while True:
@@ -77,9 +79,14 @@ def check_input(char, text):
     if text.lower() == "casanova":
         text = "* correct *"
     if len(text) >= 12:
-        text = "*incorrect*"
+        text = "incorrect"
     elif char == "\n":
-        text = ""
+        if len(text) > 0 and incorrect_state is False:
+            text = "incorrect"
+            incorrect_state = True
+        else:
+            incorrect_state = False
+            text = ""
     elif char == "\x7f" or char == "\x1b":
         text = text[:-1]
     return text
