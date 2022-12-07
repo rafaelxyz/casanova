@@ -73,7 +73,7 @@ def trigger_relay():
     except KeyboardInterrupt:
         GPIO.output(PIN, GPIO.LOW)
 
-def check_input(char, text):
+def handle_input(char, text):
     global incorrect_state
     if text.lower() == "casanova":
         text = "* correct *"
@@ -103,18 +103,23 @@ def display_txt(text):
 def clear_screen():
     draw.rectangle((0,0,width,height), outline=0, fill=0)
 
+def read():
+    sys.stdin.read(1)[0]
+
 txt = ""
 while True:
     try:
         clear_screen()
-        txt = check_input(sys.stdin.read(1)[0], txt)
+        std_in = read()
+        if std_in:
+            txt = handle_input(std_in, txt)
         display_txt(txt)
         time.sleep(.1)
         if txt == "* correct *":
             GPIO.output(PIN, GPIO.HIGH)
             counter = 0
             while True:  # try removing while
-                if sys.stdin.read(1)[0] == "\n":
+                if read() == "\n":
                     GPIO.output(PIN, GPIO.LOW)
                     clear_screen()
                     break
