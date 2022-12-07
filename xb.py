@@ -80,6 +80,12 @@ def draw_text(text):
     disp.image(image)
     disp.display()
 
+def draw_inverted_text(text):
+    draw.rectangle((0,0,width,height), outline=0, fill=255)
+    draw.text((x, top+8), str(text), font=font, fill=0)
+    disp.image(image)
+    disp.display()
+
 def draw_blink_text(text):
     counter = 0
     while True:
@@ -119,10 +125,9 @@ def statem():
     elif state == checking:
         pass
     elif state == correct:
-        draw_text("* correct *")
+        draw_inverted_text(" * correct *")
     elif state == incorrect:
-        draw_text("incorrect!")
-        time.sleep(3)
+        draw_inverted_text(" incorrect!")
         state = checking
     elif state == shutdown:
         draw_text("< shutdown ")
