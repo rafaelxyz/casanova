@@ -104,7 +104,7 @@ def clear_screen():
     draw.rectangle((0,0,width,height), outline=0, fill=0)
 
 def read():
-    sys.stdin.read(1)[0]
+    return sys.stdin.read(1)[0]
 
 txt = ""
 while True:
