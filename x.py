@@ -37,8 +37,6 @@ disp.begin()
 disp.clear()
 disp.display()
 
-# Create blank image for drawing.
-# Make sure to create image with mode '1' for 1-bit color.
 width = disp.width
 height = disp.height
 image = Image.new('1', (width, height))
@@ -85,28 +83,36 @@ def check_input(char, text):
     return text
 
 txt = ""
+def display_txt(txt):
+    draw.text((x, top+8), str(txt), font=font, fill=255)
+    disp.image(image)
+    disp.display()
+
 while True:
     try:
         draw.rectangle((0,0,width,height), outline=0, fill=0)
         txt = check_input(sys.stdin.read(1)[0], txt)
-        draw.text((x, top+8), str(txt), font=font, fill=255)
-        disp.image(image)
-        disp.display()
+        display_txt(txt)
         time.sleep(.1)
         if txt == "* correct *":
+            GPIO.output(PIN, GPIO.HIGH)
+            counter = 0
             while True:
-                GPIO.output(PIN, GPIO.HIGH)
                 if sys.stdin.read(1)[0] == "\n":
                     GPIO.output(PIN, GPIO.LOW)
                     txt = ""
                     break
+                else:
+                    counter = counter + 1
+                    display_txt("* correct ")
+                    if counter % 10:
+                        display_txt("")
+
 
     except(KeyboardInterrupt):
         GPIO.output(PIN, GPIO.LOW)
         print("\n")
         break
-    finally:
-        draw.rectangle((0,0,width,height), outline=0, fill=0)
 
 GPIO.cleanup()
 termios.tcsetattr(sys.stdin, termios.TCSADRAIN, filedescriptors)
