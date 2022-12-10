@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="generator" content="CoffeeCup HTML Editor (www.coffeecup.com)">
+    <meta name="dcterms.created" content="sön, 06 nov 2022 14:26:12 GMT">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>BANK OF ISRAEL</title>
+    
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  
+  
+  
+  <style>
+body {
+  background-image: url('bakgrund bank1.png');
+}
+</style>
+
+<span style="font-weight: bold; font-style: normal; text-decoration: none; font-size: 36pt; color: #FFFFFF;">BANK OF ISRAEL</span>	
+<br>
+<font color="#FFFFFF"><B>Transfers </font></B>	
+<br>
+<font color="#FFFFFF">Logged in as costumer </font>	
+<br>
+<font color="#00FF40">Current balance: 1.437.298 USD </font>	
+
+<hr color="#FFFFFF" />
+
+<br><br><br><br>
+
+ 
+ 
+
+ 
+ 
+  <form>
+
+ <p><font color="#FFFFFF">  </font>													
+<font color="#FFFFFF">Your full name <br>
+
+  <input type="text" placeholder="First name/Last name" name="text1">
+
+</p>
+
+<p><font color="#FFFFFF"> </font>													
+<font color="#FFFFFF">Birth date <br>					    
+
+  <input type="text" placeholder="YY/MM/DD" name="text2">
+
+</p>
+
+<p><font color="#FFFFFF">Mothers full name <br>
+
+ </font>	
+
+  <input type="text" placeholder="First name/Last name" name="text3">
+
+</p>
+
+<p><font color="#FFFFFF">Dogs name <br>
+
+ </font>	
+
+  <input type="text" placeholder="First name" name="text4">
+
+</p>
+
+
+
+<p> 
+
+  <input type="button" value="Submit" name="Submit" onclick="validate(text1.value,text2.value,text3.value,text4.value)" >
+
+</p>
+
+ 
+
+</form>
+
+<script language = "javascript">
+
+function match(txt1, txt2) {
+    txt1 = txt1.toLowerCase();
+    txt1 = txt1.replaceAll("/", "_");
+    txt1 = txt1.replace(" ", "_");
+    txt1 = txt1.trim();
+    if (txt1 === txt2) {
+        console.log("Matching: " + txt1 + ":" + txt2);
+        return true;
+    } else {
+        console.log("Not matching: " + txt1 + ":" + txt2);
+        return false;
+    }
+}
+
+function validate(text1,text2,text3,text4) {
+    console.log("hello");
+    const your_name = "netanel_toledano";
+    const birth_date = "88_11_01";
+    const mothers_name = "mirjam_toledano";
+    const dogs_name = "goran";
+    if (match(text1, your_name) && match(text2, birth_date) && match(text3, mothers_name) && match(text4, dogs_name)) {
+        load('0704015869.html');
+    }
+    else {
+        load('170936.html');
+    }
+}
+
+function load(url)
+
+{
+
+ location.href=url;
+
+}
+
+</script>
+
+
+
+
+  
+  </body>
+</html>
