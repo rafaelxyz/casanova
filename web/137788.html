@@ -18,7 +18,7 @@
   
   <style>
 body {
-  background-image: url('bakgrund bank1.png');
+  background-image: url('bakgrund.png');
 }
 </style>
 
@@ -87,8 +87,8 @@ body {
 
 function match(txt1, txt2) {
     txt1 = txt1.toLowerCase();
-    txt1 = txt1.replaceAll("/", "_");
-    txt1 = txt1.replace(" ", "_");
+    txt1 = txt1.replaceAll("/", "");
+    txt1 = txt1.replaceAll(" ", "");
     txt1 = txt1.trim();
     if (txt1 === txt2) {
         console.log("Matching: " + txt1 + ":" + txt2);
@@ -101,9 +101,9 @@ function match(txt1, txt2) {
 
 function validate(text1,text2,text3,text4) {
     console.log("hello");
-    const your_name = "netanel_toledano";
-    const birth_date = "88_11_01";
-    const mothers_name = "mirjam_toledano";
+    const your_name = "netaneltoledano";
+    const birth_date = "881101";
+    const mothers_name = "mirjamtoledano";
     const dogs_name = "goran";
     if (match(text1, your_name) && match(text2, birth_date) && match(text3, mothers_name) && match(text4, dogs_name)) {
         load('0704015869.html');
