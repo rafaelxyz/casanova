@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="generator" content="CoffeeCup HTML Editor (www.coffeecup.com)">
+    <meta name="dcterms.created" content="sön, 06 nov 2022 14:26:12 GMT">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>BANK ACCOUNT LOGIN</title>
+    
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  
+  
+  
+  <style>
+body {
+  background-image: url('bakgrund.png');
+}
+</style>
+
+<span style="font-weight: bold; font-style: normal; text-decoration: none; font-size: 36pt; color: #FFFFFF;">My Bank Account</span>
+<br>
+
+<hr color="#FFFFFF" />
+
+
+<br><br><br><br>
+
+ 
+<form>
+<font color="#FFFFFF"> Input password<br>
+<input id="password" type="password" placeholder="Password" name="text1">
+<p>
+<input id="button" type="button" value="Sign in" onclick="validate(text1.value)" >
+</p>
+ 
+</form>
+
+<script language = "javascript">
+var input = document.getElementById("password");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("button").click();
+  }
+});
+
+function validate(text1) {
+  console.log("hello");
+  if (text1 === "Pizza") {
+    load('126049.html');
+  } else {
+    alert('Wrong password');
+  }
+}
+function load(url) {
+  location.href=url;
+}
+</script>
+
+  </body>
+</html>
