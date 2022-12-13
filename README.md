@@ -1,17 +1,14 @@
 
-# Start escape room casanova program
-  r
-
-# Exit to shell from casanova program
-  e
-
-# Restart casanova program after unlock
-  ctrl + c
+# Raspberry program
+  restart after "correct": 1 <Enter>
+  blank screen: <Enter>
+  shutdown: szcz<Enter>
+  exit to shell: ctrl + c
+  start from shell: x <Enter>
 
 # Passwords
   casanova: 123
   pi: raspberry
-
 
 # Notes
 
