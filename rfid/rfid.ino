@@ -31,7 +31,8 @@ const byte resetPin = 8;
 // This pin will be driven LOW to release a lock when puzzle is solved
 const byte lockPin = A0;
 // The sequence of NFC tag IDs required to solve the puzzle
-const String correctIDs[] = { "3d1a5a6",  "93942da6",  "d3fb1a6", "13178ea6" };
+const String correctIDs[] = { "a4feee5b",  "4cb805e",  "a4dadf5b", "a4fe595b" };
+const String correctIDs2[] = { "14271c5e",  "b45625b",  "14a1ff5e", "4e28a5e" };
 
 // GLOBALS
 // Initialise an array of MFRC522 instances representing each reader
@@ -111,6 +112,7 @@ void loop() {
 
   // Loop through each reader
   for (uint8_t i=0; i<numReaders; i++) {
+    boolean match = false;
 
     // Initialise the sensor
     mfrc522[i].PCD_Init();
@@ -133,7 +135,14 @@ void loop() {
     }
     
     // If the reading fails to match the correct ID for this sensor 
-    if(currentIDs[i] != correctIDs[i]) {
+    if(currentIDs[i] == correctIDs[i]) {
+      match = true;
+    }
+    if (currentIDs[i] == correctIDs2[i]) {
+      match = true;
+    }
+
+    if (match == false) {
       // The puzzle has not been solved
       puzzleSolved = false;
     }
