@@ -17,7 +17,10 @@
 ```
 
 # Notes
-## /boot/config.txt
+    https://www.waveshare.com/wiki/2.23inch_OLED_HAT
+
+# /boot/config.txt
+
 ```
     dtoverlay=tft35a:rotate=90
 ```
