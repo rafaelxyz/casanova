@@ -1,27 +1,17 @@
-import gpio_wrap
-import draw_wrap
-
 import re
 import tty
 import sys
 import termios
 import time
 import sys
-import os
-import shutil
 import subprocess
+
+import gpio_wrap
+import draw_wrap
 
 filedescriptors = termios.tcgetattr(sys.stdin)
 tty.setcbreak(sys.stdin)
 
-
-def draw_text(text):
-    print(text)
-    draw_wrap.draw_text(text)
-
-def draw_inverted_text(text):
-    print("!" + text)
-    draw_wrap.draw_inverted_text(text)
 
 def update_txt(char, text):
     global state
@@ -45,18 +35,18 @@ def update_txt(char, text):
 def statem():
     global state
     if state == starting:
-        draw_text("> started")
+        draw_wrap.draw_text("> started")
         state = checking
     elif state == checking:
         pass
     elif state == correct:
-        draw_inverted_text(" * correct *")
+        draw_wrap.draw_inverted_text(" * correct *")
     elif state == incorrect:
-        draw_inverted_text(" incorrect!")
+        draw_wrap.draw_inverted_text(" incorrect!")
         state = checking
     elif state == shutdown:
-        draw_text("< shutdown ")
-        #GPIO.cleanup()
+        draw_wrap.draw_text("< shutdown ")
+        gpio_wrap.cleanup()
         subprocess.call(['shutdown', '-h', 'now'], shell=False)
 
 
@@ -70,13 +60,14 @@ while True:
     try:
         char = sys.stdin.read(1)[0]
         txt = update_txt(char, txt)
-        draw_text(txt)
+        draw_wrap.draw_text(txt)
         statem()
         time.sleep(.1)
         if state == correct:
             while True:
                 gpio_wrap.set_high()
                 if sys.stdin.read(1)[0] == "1":
+                    # '1' was pressed, reset the game
                     gpio_wrap.set_low()
                     txt = ""
                     state = starting
@@ -84,7 +75,7 @@ while True:
 
     except(KeyboardInterrupt):
         gpio_wrap.set_low()
-        draw_text("x <Enter>")
+        draw_wrap.draw_text("x <Enter>")
         print("exiting to terminal")
         break
 
