@@ -28,7 +28,7 @@ x = 0
 
 font = ImageFont.truetype('04B_08__.TTF',16)
 
-def draw_text(text):
+def text(text):
     print(text)
     draw.rectangle((0,0,width,height), outline=0, fill=0)
     draw.text((x, top+8), str(text), font=font, fill=255)
@@ -36,9 +36,15 @@ def draw_text(text):
     disp.ShowImage()
 
 
-def draw_inverted_text(text):
+def inverted_text(text):
     print("!" + text)
     draw.rectangle((0,0,width,height), outline=0, fill=255)
     draw.text((x, top+8), str(text), font=font, fill=0)
+    disp.getbuffer(image)
+    disp.ShowImage()
+
+
+def black_screen():
+    draw.rectangle((0,0,width,height), outline=0, fill=0)
     disp.getbuffer(image)
     disp.ShowImage()

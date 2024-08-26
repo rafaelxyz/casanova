@@ -1,0 +1,2 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+sudo /home/pi/casanova/casa2/run.sh

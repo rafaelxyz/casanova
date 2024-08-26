@@ -12,30 +12,15 @@
 # Passwords
 
 ```
-    casanova: 123
     pi: raspberry
 ```
 
 # Notes
+
     https://www.waveshare.com/wiki/2.23inch_OLED_HAT
+
+    use raspi config for SPI, non write os, autologin.
 
 # /boot/config.txt
 
-```
     dtoverlay=tft35a:rotate=90
-```
-
-## autologin
-
-```
-    sudo raspi-config
-    sudo vi /etc/systemd/system/getty@tty1.service.d/autologin.conf
-```
-
-## /etc/sudoers
-
-```
-    ALL ALL=(root) NOPASSWD: /sbin/shutdown
-    Cmd_Alias ESCAPE_ROOM = /home/casanova/casanova/run.py
-    casanova ALL=(ALL) NOPASSWD: ESCAPE_ROOM
-```

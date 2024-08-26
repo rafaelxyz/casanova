@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import re
 import tty
 import sys
@@ -35,17 +37,17 @@ def update_txt(char, text):
 def statem():
     global state
     if state == starting:
-        draw_wrap.draw_text("> started")
+        draw_wrap.text("> started")
         state = checking
     elif state == checking:
         pass
     elif state == correct:
-        draw_wrap.draw_inverted_text(" * correct *")
+        draw_wrap.inverted_text(" * correct *")
     elif state == incorrect:
-        draw_wrap.draw_inverted_text(" incorrect!")
+        draw_wrap.inverted_text(" incorrect!")
         state = checking
     elif state == shutdown:
-        draw_wrap.draw_text("< shutdown ")
+        draw_wrap.text("< shutdown ")
         gpio_wrap.cleanup()
         subprocess.call(['shutdown', '-h', 'now'], shell=False)
 
@@ -60,7 +62,7 @@ while True:
     try:
         char = sys.stdin.read(1)[0]
         txt = update_txt(char, txt)
-        draw_wrap.draw_text(txt)
+        draw_wrap.text(txt)
         statem()
         time.sleep(.1)
         if state == correct:
@@ -75,8 +77,10 @@ while True:
 
     except(KeyboardInterrupt):
         gpio_wrap.set_low()
-        draw_wrap.draw_text("x <Enter>")
+        draw_wrap.text("x <Enter>")
+        #time.sleep(1)
         print("exiting to terminal")
+        #draw_wrap.black_screen()
         break
 
 gpio_wrap.cleanup()
