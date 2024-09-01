@@ -6,12 +6,19 @@ PIN = 21
 GPIO.setup(PIN, GPIO.OUT) # GPIO Assign mode
 GPIO.setwarnings(False)
 
+INVERT = False
 
 def set_high():
-    GPIO.output(PIN, GPIO.HIGH)
+    if not INVERT:
+        GPIO.output(PIN, GPIO.HIGH)
+    else:
+        GPIO.output(PIN, GPIO.LOW)
 
 def set_low():
-    GPIO.output(PIN, GPIO.LOW)
+    if not INVERT:
+        GPIO.output(PIN, GPIO.LOW)
+    else:
+        GPIO.output(PIN, GPIO.HIGH)
 
 def cleanup():
     GPIO.cleanup()
