@@ -1,6 +1,7 @@
 #!/bin/bash
-if pgrep -x "run.sh" > /dev/null; then
-    echo "run.sh already started"
+if pgrep -f -x "python casa.py" > /dev/null; then
+    echo "casa.py already started"
 else
+    echo "starting casa.py"
     cd /home/pi/casanova/casa2/; python casa.py
 fi
