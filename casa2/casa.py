@@ -69,8 +69,6 @@ while True:
             while True:
                 gpio_wrap.set_high()
                 if sys.stdin.read(1)[0] == "1":
-                    draw_wrap.text("GAME RESET")
-                    time.sleep(1)
                     gpio_wrap.set_low()
                     txt = ""
                     state = starting
@@ -78,8 +76,8 @@ while True:
 
     except(KeyboardInterrupt):
         gpio_wrap.set_low()
-        draw_wrap.text("EXITING")
-        time.sleep(1)
+        draw_wrap.text("exit to terminal!")
+        time.sleep(2)
         print("exiting to terminal")
         draw_wrap.black_screen()
         break
